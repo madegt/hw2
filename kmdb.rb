@@ -16,7 +16,7 @@
 
 
 #3) Migrate 
-#gitpod/workspace/hw2_mg (main) $ rails db:migrate
+#gitpod/workspace/hw2 (main) $ rails db:migrate
 
 #Check with
 # rails runner data.rb
@@ -232,18 +232,20 @@ new_role.save
 # - Query the data and loop through the results to display output similar to the sample "report" below. (10 points)
 
 #See number of loops 
-n_movies=Movie.all.count
-puts "Number of movies: #{n_movies}"
+n_movies=Movie.all
 
 # Prints a header for the movies output
 puts "Movies"
 puts "======"
 puts ""
 
+#for hash (movie) in movies (list/Array)
+
 for movie in n_movies
     title = movie["title"]
     year_release=movie["year_release"]
     rated=movie["rated"]   
+    ##### Change this to be the name of the studio, not the ID
     studio_id= movie["studio_id"]
     puts "#{title} #{year_release} #{rated} #{studio_id}"
 end
@@ -252,8 +254,7 @@ end
 # TODO!
 
 #See number of loops 
-n_roles=Role.all.count
-puts "Number of times on loop: #{n_roles}"
+n_roles=Role.all
 
 # Prints a header for the cast output
 puts ""
@@ -261,14 +262,34 @@ puts "Top Cast"
 puts "========"
 puts ""
 
-for cast in n_roles
-    title = movie["title"]
-    actor=actor["name"]
-    role=role["character_name"]   
-    puts "#{title} #{actor} #{role}"
+#before the loop we need to find the item from the table
+
+for role in n_roles
+
+    #for title
+#in role we have movie_id, character_name, actor_id
+
+##creating inner join
+#first we get the movie id, you get a hash (the full row)
+movie=Movie.find_by({"id"=>role["movie_id"]})
+#get the name
+movie_name=movie["title"]
+
+#puts "#{movie}" #the entire hash
+#puts "#{movie_name}"
+
+character_name=role["character_name"]
+
+#for actor
+actor=Actor.find_by({"id"=>role["actor_id"]})
+actor_name=actor["name"]
+
+#for role
+role=role["character_name"]
+
+    puts "#{movie_name} #{actor_name} #{role}"
+
 end
-
-
 
 # To run this file, run the following command at your terminal prompt:
 # `rails runner kmdb.rb`
