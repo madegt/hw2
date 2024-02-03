@@ -14,7 +14,6 @@
 #2) Create table columns > db>migrate
 #on each tab of migrate I created the tables
 
-
 #3) Migrate 
 #gitpod/workspace/hw2 (main) $ rails db:migrate
 
