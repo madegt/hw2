@@ -247,7 +247,13 @@ for movie in n_movies
     rated=movie["rated"]   
     ##### Change this to be the name of the studio, not the ID
     studio_id= movie["studio_id"]
-    puts "#{title} #{year_release} #{rated} #{studio_id}"
+
+#first we get the studio id, you get a hash (the full row)
+studio=Studio.find_by({"id"=>role["studio_id"]})
+#get the name
+studio_name=studio["name"]
+
+    puts "#{title} #{year_release} #{rated} #{studio_name}"
 end
 
 # Query the movies data and loop through the results to display the movies output.
