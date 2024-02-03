@@ -3,6 +3,273 @@
 # The end product will be a report that prints the movies and the top-billed
 # cast for each movie in the database.
 
+
+#1) Generate tables in model from the terminal
+
+#rails generate model Studio
+#rails generate model Movie
+#rails generate model Actor
+#rails generate model Role
+
+#2) Create table columns > db>migrate
+#on each tab of migrate I created the tables
+
+
+#3) Migrate 
+#gitpod/workspace/hw2_mg (main) $ rails db:migrate
+
+#Check with
+# rails runner data.rb
+
+# - Insert the "Batman" sample data using ruby code. Do not use hard-coded ids.
+#   Delete any existing data beforehand so that each run of this script does not
+#   create duplicate data. (5 points)
+
+#4) Delete all existing data
+
+Studio.destroy_all
+Movie.destroy_all
+Actor.destroy_all
+Role.destroy_all
+
+#5) Insert data sample using ruby 
+
+#Studio
+new_studio = Studio.new
+new_studio["name"] = "Warner Bros."
+new_studio.save
+
+#Movie
+
+#build relationship w movies
+wb = Studio.find_by({"name" => "Warner Bros."})
+
+new_movie= Movie.new
+new_movie["title"] = "Batman Begins"
+new_movie["year_released"] = 2005
+new_movie["rated"] = "PG-13"
+new_movie["studio_id"] = wb["id"]
+new_movie.save
+
+
+new_movie= Movie.new
+new_movie["title"] = "The Dark Knight"
+new_movie["year_released"] = 2008
+new_movie["rated"] = "PG-13"
+new_movie["studio_id"] = wb["id"]
+new_movie.save
+
+new_movie= Movie.new
+new_movie["title"] = "The Dark Knight Rises"
+new_movie["year_released"] = 2012
+new_movie["rated"] = "PG-13"
+new_movie["studio_id"] = wb["id"]
+new_movie.save
+
+#Actor 
+    #1
+new_actor= Actor.new
+new_actor["name"] = "Christian Bale"
+new_actor.save
+    #2
+new_actor= Actor.new
+new_actor["name"] = "Michael Caine"
+new_actor.save
+    #3
+new_actor= Actor.new
+new_actor["name"] = "Liam Neeson"
+new_actor.save
+    #4
+new_actor= Actor.new
+new_actor["name"] = "Katie Holmes"
+new_actor.save
+    #5
+new_actor= Actor.new
+new_actor["name"] = "Gary Oldman"
+new_actor.save
+    #6
+new_actor= Actor.new
+new_actor["name"] = "Heath Ledger"
+new_actor.save
+    #7
+new_actor= Actor.new
+new_actor["name"] = "Aaron Eckhart"
+new_actor.save
+    #8
+new_actor= Actor.new
+new_actor["name"] = "Maggie Gyllenhaal"
+new_actor.save
+
+    #9
+new_actor= Actor.new
+new_actor["name"] = "Tom Hardy"
+new_actor.save
+    
+   #10
+   new_actor= Actor.new
+   new_actor["name"] = "Joseph Gordon-Levitt"
+   new_actor.save
+
+   #11
+   new_actor= Actor.new
+   new_actor["name"] = "Anne Hathaway"
+   new_actor.save
+
+##Role
+
+#build relationship w movie title
+batb = Movie.find_by({"title" => "Batman Begins"})
+dak = Movie.find_by({"title" => "The Dark Knight"})
+dakrise = Movie.find_by({"title" => "The Dark Knight Rises"})
+
+#build relationship w movie actor 
+c_b = Actor.find_by({"name"=>"Christian Bale"})
+m_c = Actor.find_by({"name"=>"Michael Caine"})
+l_n = Actor.find_by({"name"=>"Liam Neeson"})
+k_h = Actor.find_by({"name"=>"Katie Holmes"})
+g_old = Actor.find_by({"name"=>"Gary Oldman"})
+h_l = Actor.find_by({"name"=>"Heath Ledger"})
+a_e = Actor.find_by({"name"=>"Aaron Eckhart"})
+m_g = Actor.find_by({"name"=>"Maggie Gyllenhaal"})
+t_h=Actor.find_by({"name"=>"Tom Hardy"})
+jgl=Actor.find_by({"name"=>"Joseph Gordon-Levitt"})
+a_h=Actor.find_by({"name"=>"Anne Hathaway"})
+
+#1st movie
+new_role= Role.new
+new_role["movie_id"] = batb["id"]
+new_role["actor_id"] = c_b["id"]
+new_role["character_name"] = "Bruce Wayne"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = batb["id"]
+new_role["actor_id"] = m_c["id"]
+new_role["character_name"] = "Alfred"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = batb["id"]
+new_role["actor_id"] = l_n["id"]
+new_role["character_name"] = "Ra's Al Ghul"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = batb["id"]
+new_role["actor_id"] = k_h["id"]
+new_role["character_name"] = "Rachel Dawes"
+new_role.save
+
+#2nd movie
+new_role= Role.new
+new_role["movie_id"] = dak["id"]
+new_role["actor_id"] = g_old["id"]
+new_role["character_name"] = "Commissioner Gordon"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = dak["id"]
+new_role["actor_id"] = c_b["id"]
+new_role["character_name"] = "Bruce Wayne"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = dak["id"]
+new_role["actor_id"] = m_c["id"]
+new_role["character_name"] = "Alfred"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = dak["id"]
+new_role["actor_id"] = h_l["id"]
+new_role["character_name"] = "Joker"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = dak["id"]
+new_role["actor_id"] = a_e["id"]
+new_role["character_name"] = "Harvey Dent"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = dak["id"]
+new_role["actor_id"] = m_g["id"]
+new_role["character_name"] = "Rachel Dawes"
+new_role.save
+
+#3rd movie
+
+new_role= Role.new
+new_role["movie_id"] = dakrise["id"]
+new_role["actor_id"] = c_b["id"]
+new_role["character_name"] = "Bruce Wayne"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = dakrise["id"]
+new_role["actor_id"] = g_old["id"]
+new_role["character_name"] = "Commissioner Gordon"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = dakrise["id"]
+new_role["actor_id"] = t_h["id"]
+new_role["character_name"] = "Bane"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = dakrise["id"]
+new_role["actor_id"] = jgl["id"]
+new_role["character_name"] = "John Blake"
+new_role.save
+
+new_role= Role.new
+new_role["movie_id"] = dakrise["id"]
+new_role["actor_id"] = a_h["id"]
+new_role["character_name"] = "Selina Kyle"
+new_role.save
+
+# - Query the data and loop through the results to display output similar to the sample "report" below. (10 points)
+
+#See number of loops 
+n_movies=Movie.all.count
+puts "Number of movies: #{n_movies}"
+
+# Prints a header for the movies output
+puts "Movies"
+puts "======"
+puts ""
+
+for movie in n_movies
+    title = movie["title"]
+    year_release=movie["year_release"]
+    rated=movie["rated"]   
+    studio_id= movie["studio_id"]
+    puts "#{title} #{year_release} #{rated} #{studio_id}"
+end
+
+# Query the movies data and loop through the results to display the movies output.
+# TODO!
+
+#See number of loops 
+n_roles=Role.all.count
+puts "Number of times on loop: #{n_roles}"
+
+# Prints a header for the cast output
+puts ""
+puts "Top Cast"
+puts "========"
+puts ""
+
+for cast in n_roles
+    title = movie["title"]
+    actor=actor["name"]
+    role=role["character_name"]   
+    puts "#{title} #{actor} #{role}"
+end
+
+
+
 # To run this file, run the following command at your terminal prompt:
 # `rails runner kmdb.rb`
 
