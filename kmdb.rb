@@ -296,6 +296,7 @@ role=role["character_name"]
 
 end
 
+
 # To run this file, run the following command at your terminal prompt:
 # `rails runner kmdb.rb`
 
