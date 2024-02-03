@@ -159,13 +159,13 @@ new_role["actor_id"] = k_h["id"]
 new_role["character_name"] = "Rachel Dawes"
 new_role.save
 
-#2nd movie
 new_role= Role.new
-new_role["movie_id"] = dak["id"]
+new_role["movie_id"] = batb["id"]
 new_role["actor_id"] = g_old["id"]
 new_role["character_name"] = "Commissioner Gordon"
 new_role.save
 
+#2nd movie
 new_role= Role.new
 new_role["movie_id"] = dak["id"]
 new_role["actor_id"] = c_b["id"]
@@ -248,7 +248,7 @@ for movie in n_movies
     studio_id= movie["studio_id"]
 
 #first we get the studio id, you get a hash (the full row)
-studio=Studio.find_by({"id"=>role["studio_id"]})
+studio=Studio.find_by({"id"=>studio_id})
 #get the name
 studio_name=studio["name"]
 
@@ -364,26 +364,3 @@ end
 # Use `Model.destroy_all` code.
 # TODO!
 
-# Generate models and tables, according to the domain model.
-# TODO!
-
-# Insert data into the database that reflects the sample data shown above.
-# Do not use hard-coded foreign key IDs.
-# TODO!
-
-# Prints a header for the movies output
-puts "Movies"
-puts "======"
-puts ""
-
-# Query the movies data and loop through the results to display the movies output.
-# TODO!
-
-# Prints a header for the cast output
-puts ""
-puts "Top Cast"
-puts "========"
-puts ""
-
-# Query the cast data and loop through the results to display the cast output for each movie.
-# TODO!
